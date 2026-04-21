@@ -1,15 +1,7 @@
 
 import React from "react" ;
 
-// arrow function 
-const Hello = (props) =>{
-  console.log(props);
-  return (
-    <div>
-      <h4>Hello Welcome , {props.userName}</h4>
-    </div>
-  )
-}
+
 
 // Named function or function expression
 function App(){
@@ -19,9 +11,9 @@ function App(){
   return(
     <div>
         <h1>Multiple Components</h1>
-        <Hello userName = {userName1}/>
-        <Hello userName = {userName2}/>
-
+        <p>Welcome to {userName1}</p>
+        <h3>Welcome to {userName2}</h3>
+        <a href="www.google.com" target="_blank">google</a>
     </div>
   )
 }
