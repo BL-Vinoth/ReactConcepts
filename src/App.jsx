@@ -2,25 +2,26 @@
 import React from "react" ;
 
 // arrow function 
-const Hello = () =>{
+const Hello = (props) =>{
+  console.log(props);
   return (
     <div>
-      <p>Hello Welcome to BridgeLabz</p>
+      <h4>Hello Welcome , {props.userName}</h4>
     </div>
   )
 }
 
 // Named function or function expression
 function App(){
-  const a = 10 ;
-  const b = 20 ;
-
-  const date = new Date();
+ 
+  let userName1 = "Vinoth" ;
+  let userName2 = "Sathish";
   return(
     <div>
         <h1>Multiple Components</h1>
-        <Hello/>
-        <Hello/>
+        <Hello userName = {userName1}/>
+        <Hello userName = {userName2}/>
+
     </div>
   )
 }
