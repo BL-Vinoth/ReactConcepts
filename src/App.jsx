@@ -1,6 +1,16 @@
 
 import React from "react" ;
 
+// arrow function 
+const Hello = () =>{
+  return (
+    <div>
+      <p>Hello Welcome to BridgeLabz</p>
+    </div>
+  )
+}
+
+// Named function or function expression
 function App(){
   const a = 10 ;
   const b = 20 ;
@@ -8,8 +18,9 @@ function App(){
   const date = new Date();
   return(
     <div>
-        <p>Today Date is <b>{date.toDateString()}</b></p>
-        <p>{a} plus {b} it is {a+b}</p>
+        <h1>Multiple Components</h1>
+        <Hello/>
+        <Hello/>
     </div>
   )
 }
