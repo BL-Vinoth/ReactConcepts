@@ -1,6 +1,6 @@
 
 import React from "react" ;
-
+import Hello from "./Components/Hello";
 
 
 // Named function or function expression
@@ -10,10 +10,8 @@ function App(){
   let userName2 = "Sathish";
   return(
     <div>
-        <h1>Multiple Components</h1>
-        <p>Welcome to {userName1}</p>
-        <h3>Welcome to {userName2}</h3>
-        <a href="www.google.com" target="_blank">google</a>
+       <h1>Greetings</h1>
+       <Hello name="vinoth" age={25}/>
     </div>
   )
 }
