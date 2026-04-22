@@ -1,16 +1,17 @@
 
 import React from "react" ;
 
-function Note({notes}){
+function Note({note}){
+   
+    if(note.important){
+        return(
+            <li>{note.content} **</li>
+        )
+    }
+
     return(
-        <div>
-            <ul>
-                {
-                    notes.map((note) => <li key={note.id}>{note.content}</li>)
-                }
-            </ul>
-        </div>
+        <li>{note.content}</li>
     )
 }
 
-export default App ;
+export default Note ;

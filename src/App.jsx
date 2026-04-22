@@ -1,6 +1,6 @@
 
 import React from "react" ;
-import Hello from "./Components/Hello";
+import Note from "./Components/Note";
 
 
 // Named function or function expression
@@ -13,7 +13,7 @@ function App({notes}){
       <ul>
         {
           notes.map(note => 
-            <Note notes = {notes}/>
+            <Note key={note.id} note = {note}/>
           )
         }
 
