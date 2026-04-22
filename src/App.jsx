@@ -12,8 +12,12 @@ function App({notes}){
       <h1>Notes</h1>
       <ul>
         {
-          notes.map(note => <li key={note.id}>{note.content}</li>)
+          notes.map(note => 
+            <Note notes = {notes}/>
+          )
         }
+
+
       </ul>
     </div>
   )
