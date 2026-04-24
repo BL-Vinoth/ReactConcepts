@@ -1,25 +1,34 @@
-import Note from "./Components/Note";
-import "./App.css";
-function App({notes}){
-  const addNote = (event) => {
-    event.preventDefault() ;
-    console.log("button Clicked" , event.target);
-  }
-  return(
-    <div className="content">
-      <h3>Notes</h3>
-      <ul>
-        {
-          notes.map(note => 
-            <Note key={note.id} note = {note}/>
-          )
-        }
-      </ul>
-      <form onSubmit={addNote}>
-        <input/>
-        <button type="submit"> Save Note</button>
-      </form>
+/*
+  Hooks: 
+    - any function that starts with "use" is called a hook
+    - they are special functions that are available only while React is rendering.
 
+    To create a counter, where the value is increased as a function of time or at the click of a button.
+*/
+
+import React from "react" ;
+import { useState } from "react";
+function App(){
+  const [counter, setCounter] = useState(0);
+
+  const handlePlus = () => {
+    setCounter(counter + 1);
+  }
+
+  const handleMinus = () => {
+    setCounter(counter - 1);
+  }
+
+  const handleZero = () => {
+    setCounter(0);
+  }
+
+  return(
+    <div>
+        <p>Button Click Counts : { counter }</p>
+        <button onClick={handlePlus} >Increse</button>
+        <button onClick={handleMinus} >Decrese</button>
+        <button onClick={handleZero} >Reset</button>
     </div>
   )
 }
