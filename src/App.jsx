@@ -1,35 +1,29 @@
-// props drilling: props drilling occurs when you need to pass down the data through multiple nested components to reach the ones that require the data.
-
 import React from 'react';
-
-function GrandChildComponent({ data }) {
-  console.log(`from grand child component: ${data}`);
-  return (
-    <div>
-      <h3>Grand Child Component</h3>
-    </div>
-  )
-}
-
-function ChildComponent({ data }) {
-  console.log(data);
-  return (
-    <div>
-      <h2>Child Component</h2>
-      <GrandChildComponent data={ data } />
-    </div>
-  )
-}
+import Home from './Components/Home';
+import Notes from './Components/Notes';
+import Users from './Components/Users';
+import { Link, Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
 
-  const parentData = `Hello from Parent`;
+  const padding = {
+    padding: 5,
+  }
 
   return (
-    <div>
-      <h2>Parent Component</h2>
-      <ChildComponent data={ parentData } />
-    </div>
+    <Router>
+      <div>
+        <Link to='/' style={padding}>home</Link>
+        <Link to='/notes' style={padding}>notes</Link>
+        <Link to='/users' style={padding}>users</Link>
+      </div>
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/notes' element={<Notes />} />
+        <Route path='/users' element={ <Users />} />
+      </Routes>
+    </Router>
   )
 }
 
