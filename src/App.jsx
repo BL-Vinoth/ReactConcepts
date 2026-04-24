@@ -1,37 +1,45 @@
 /*
-  Hooks: 
-    - any function that starts with "use" is called a hook
-    - they are special functions that are available only while React is rendering.
-
-    To create a counter, where the value is increased as a function of time or at the click of a button.
+  useEffect Hook:
+    - useEffect hook is used in functional components in React to manage the side effects [data fetching, DOM manipulation, subscriptions].
 */
 
-import React from "react" ;
-import { useState } from "react";
-function App(){
-  const [counter, setCounter] = useState(0);
+import React, { useEffect, useState } from 'react';
 
-  const handlePlus = () => {
-    setCounter(counter + 1);
+function App() {
+
+  // create a state to store the data fetched from the API
+  const [posts, setPosts] = useState(null);
+
+  const fetchPosts = async () => {
+    let response = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+    let data = await response.json();
+    setPosts(data);
   }
 
-  const handleMinus = () => {
-    setCounter(counter - 1);
-  }
+  // data has to be fetched
+  // the following will run only once
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-  const handleZero = () => {
-    setCounter(0);
-  }
-
- 
-  return(
+  return (
     <div>
-        <p>Button Click Counts : { counter }</p>
-        <button onClick={handlePlus} style={{padding:'5px', margin:'5px'}} >Increse</button>
-        <button onClick={handleMinus} style={{padding:'5px', margin:'5px'}} >Decrese</button>
-        <button onClick={handleZero} style={{padding:'5px',margin:'5px'}} >Reset</button>
+      <h2>API DATA</h2>
+      {
+        posts ? (
+          <ul>
+            {
+              posts.map(post => 
+                <li key={post.id}>{ post.title }</li>
+              )
+            }
+          </ul>
+        ) : (
+            <p>Fetching Data...</p>
+        )
+      }
     </div>
   )
 }
 
-export default App ;
+export default App;
