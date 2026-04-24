@@ -1,12 +1,13 @@
 import Note from "./Components/Note";
+import "./App.css";
 function App({notes}){
   const addNote = (event) => {
     event.preventDefault() ;
     console.log("button Clicked" , event.target);
   }
   return(
-    <div>
-      <h1>Notes</h1>
+    <div className="content">
+      <h3>Notes</h3>
       <ul>
         {
           notes.map(note => 
