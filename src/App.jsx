@@ -1,20 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useReducer, useState } from 'react';
+import { initialState, reducer } from './reducers/countReducer';
 
 function App() {
 
-  // get the reference of the button
-  const bodyRef = useRef(document.body);
-
-  const changeColor = () => {
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'pink', 'black', 'brown', 'orange', 'white'];
-    const randomColor = colors[Math.floor(Math.random()*10)];
-    bodyRef.current.style.backgroundColor = randomColor;
-  }
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div>
-      <h3>Background Color Switcher</h3>
-      <button onClick={changeColor}>Change Color</button>
+      <h3>Counter: { state.count }</h3>
+      <button onClick={() => dispatch({ type: 'incr' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'decr' })}>Decrement</button>
+      <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+
+      <h4>Clicks History</h4>
+      <p>{ state.clicksHistory.join(' ') }</p>
     </div>
   )
 }
