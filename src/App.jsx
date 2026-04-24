@@ -23,12 +23,13 @@ function App(){
     setCounter(0);
   }
 
+ 
   return(
     <div>
         <p>Button Click Counts : { counter }</p>
-        <button onClick={handlePlus} >Increse</button>
-        <button onClick={handleMinus} >Decrese</button>
-        <button onClick={handleZero} >Reset</button>
+        <button onClick={handlePlus} style={{padding:'5px', margin:'5px'}} >Increse</button>
+        <button onClick={handleMinus} style={{padding:'5px', margin:'5px'}} >Decrese</button>
+        <button onClick={handleZero} style={{padding:'5px',margin:'5px'}} >Reset</button>
     </div>
   )
 }
