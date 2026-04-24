@@ -1,31 +1,28 @@
-import React from 'react';
-import Home from './Components/Home';
-import Notes from './Components/Notes';
-import Users from './Components/Users';
-import { Link, Routes, BrowserRouter as Router, Route } from 'react-router-dom';
+// Context API: It is to manage and share the states across the nested components or component tree without need to pass the props data down through multiple levels of the nested components.
+import React, { createContext, useState } from 'react';
+import ChildComponent from './components/ChildComponent';
 
-// install comments : npm install react-router-dom 
+// create a context for sharing the message data
+const MessageContext = createContext();
+
+// parent component: App
 function App() {
 
-  const padding = {
-    padding: 5,
-  }
+    // this message should be rendered inside the grandchild component
+    const [message, setMessage] = useState('Hello, Grand Child!');
+    const [coins, setCoins] = useState([1, 2, 3, 4, 5]);
 
   return (
-    <Router>
       <div>
-        <Link to='/' style={padding}>home</Link>
-        <Link to='/notes' style={padding}>notes</Link>
-        <Link to='/users' style={padding}>users</Link>
-      </div>
-
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/notes' element={<Notes />} />
-        <Route path='/users' element={ <Users />} />
-      </Routes>
-    </Router>
+          <h1>Parent Component</h1>
+          <hr></hr>
+          {/* provide the context to the nested components */}
+          <MessageContext.Provider value={{message, coins}}>
+              <ChildComponent />
+          </MessageContext.Provider>
+    </div>
   )
 }
 
-export default App;
+// export the created context
+export { App as default, MessageContext };
