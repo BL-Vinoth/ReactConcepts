@@ -1,28 +1,36 @@
-// Context API: It is to manage and share the states across the nested components or component tree without need to pass the props data down through multiple levels of the nested components.
-import React, { createContext, useState } from 'react';
-import ChildComponent from './components/ChildComponent';
+// useRef hook: 
+/*
 
-// create a context for sharing the message data
-const MessageContext = createContext();
+  - It's a react's built in feature
+  - To create and manage references of DOM elements
+  - We can manipulate the element using the reference
+  without any unnecessary re-renders
 
-// parent component: App
+*/
+import React, { useRef } from 'react';
+
 function App() {
 
-    // this message should be rendered inside the grandchild component
-    const [message, setMessage] = useState('Hello, Grand Child!');
-    const [coins, setCoins] = useState([1, 2, 3, 4, 5]);
+  // create a reference using useRef hook
+  const inputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    // console.log(inputRef.current.value);
+    // inputRef.current.value = 'sathish';
+    inputRef.current.focus();
+  }
 
   return (
-      <div>
-          <h1>Parent Component</h1>
-          <hr></hr>
-          {/* provide the context to the nested components */}
-          <MessageContext.Provider value={{message, coins}}>
-              <ChildComponent />
-          </MessageContext.Provider>
+    <div>
+      <input 
+        type='text'
+        placeholder='type a note...'
+        ref={inputRef}
+      />
+
+      <button onClick={handleButtonClick}>Focus Input</button>
     </div>
   )
 }
 
-// export the created context
-export { App as default, MessageContext };
+export default App;
