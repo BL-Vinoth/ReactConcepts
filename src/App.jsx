@@ -4,6 +4,7 @@ import Notes from './Components/Notes';
 import Users from './Components/Users';
 import { Link, Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 
+// install comments : npm install react-router-dom 
 function App() {
 
   const padding = {
