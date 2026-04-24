@@ -1,132 +1,63 @@
-import React, { useRef, useState } from 'react';
+// Formik: small group of react components and hooks for building forms in React
 
-// 3. read the notes list and render it here
-/*
-  npm install json-server --save-dev
-  server run comment :   npx json-server --watch db.json --port 3005
-  npm run dev
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React from 'react';
+import './styles/App.css';
 
-*/
+function ContactForm() {
+  return (
+    <Formik
+      initialValues={{ name: '', email: '', message: '' }}
 
-function App(props) {
+      validate={(values) => {
+        const errors = {};
 
-  // define a state to store the notes from props
-  const [notes, setNotes] = useState(props.notes);
+        if (!values.name) {
+          errors.name = 'Name is required';
+        }
 
-  const [showStatus, setShowStatus] = useState('all');
+        if (values.email == '') {
+          errors.email = 'Email is required';
+        } else if(!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i.test(values.email)){
+          errors.email = 'Invalid email address';
+        }
 
-  // states for adding new note form
-  const [newNoteContent, setNewNoteContent] = useState('');
-  const [newNoteImportant, setNewNoteImportant] = useState('true');
+        return errors;
+      }}
 
-  // define a contentRef to access and manipulate the content element
-  const newNoteContentRef = useRef(null);
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+    >
+      <Form>
+        <div>
+          <label htmlFor='name'>Name</label>
+          <Field type='text' name='name' />
+          <ErrorMessage name='name' component='div' className='error'/>
+        </div>
 
-  const addNote = (event) => {
-    event.preventDefault();
-    
-    // create a new note object
-    let noteObject = {
-      id: notes.length + 1,
-      content: newNoteContent,
-      important: newNoteImportant == 'true',
-    }
+        <div>
+          <label htmlFor='email'>Email</label>
+          <Field type='email' name='email' />
+          <ErrorMessage name='email' component='div' className='error'/>
+        </div>
 
-    setNotes(notes.concat(noteObject));
+        <div>
+          <label htmlFor='message'>Message</label>
+          <Field as='textarea' name='message' />
+          <ErrorMessage name='message' component='div' className='error'/>
+        </div>
 
-    // clear the inputs
-    setNewNoteContent('');
-    setNewNoteImportant('');
+        <button type='submit'>Submit</button>
+    </Form>
+    </Formik>
+  )
+}
 
-    newNoteContentRef.current.focus();
-  }
-
-  const handleStatusChange = (event) => {
-    setShowStatus(event.target.value);
-  }
-
-  const filterNotes = (notes, showStatus) => {
-    switch (showStatus) {
-      case 'all':
-        return notes;
-      case 'imp':
-        return notes.filter(note => note.important === true);
-      case 'nonimp':
-        return notes.filter(note => note.important === false);
-    }
-  }
-
-  const notesFiltered = filterNotes(notes, showStatus);
-
+function App() {
   return (
     <div>
-      <h1>Notes</h1>
-
-      <label>
-        <input 
-          type='radio'
-          name='filter'
-          value='all'
-          onChange={handleStatusChange}
-          checked={showStatus === 'all'}
-        />
-        All Notes
-      </label>
-
-      <label>
-        <input 
-          type='radio'
-          name='filter'
-          value='imp'
-          onChange={handleStatusChange}
-        />
-        Important Notes
-      </label>
-
-      <label>
-        <input 
-          type='radio'
-          name='filter'
-          value='nonimp'
-          onChange={handleStatusChange}
-        />
-        Non-Important Notes
-      </label>
-
-      <ul>
-        {
-          notesFiltered.map(note => 
-            <li key={note.id}>{ note.content }</li>
-          )
-        }
-      </ul>
-      <hr></hr>
-      <h2>Add a New Note</h2>
-      <form onSubmit={addNote}>
-        <label>
-          Content: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input 
-            type='text'
-            ref={newNoteContentRef}
-            value={newNoteContent}
-            onChange={e => setNewNoteContent(e.target.value)}
-          />
-        </label>
-        <br /><br />
-        <label>
-          Is important: &nbsp;&nbsp;
-          <select
-            onChange={e => setNewNoteImportant(e.target.value)}
-            value={newNoteImportant}
-          >
-            <option disabled>--select--</option>
-            <option value='true'>true</option>
-            <option value='false'>false</option>
-          </select>
-        </label>
-        <br /><br />
-        <button type='submit'>Add New Note</button>
-      </form>
+      <ContactForm />
     </div>
   )
 }
