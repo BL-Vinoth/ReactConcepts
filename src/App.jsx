@@ -1,34 +1,20 @@
-// useRef hook: 
-/*
-
-  - It's a react's built in feature
-  - To create and manage references of DOM elements
-  - We can manipulate the element using the reference
-  without any unnecessary re-renders
-
-*/
 import React, { useRef } from 'react';
 
 function App() {
 
-  // create a reference using useRef hook
-  const inputRef = useRef(null);
+  // get the reference of the button
+  const bodyRef = useRef(document.body);
 
-  const handleButtonClick = () => {
-    // console.log(inputRef.current.value);
-    // inputRef.current.value = 'sathish';
-    inputRef.current.focus();
+  const changeColor = () => {
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'pink', 'black', 'brown', 'orange', 'white'];
+    const randomColor = colors[Math.floor(Math.random()*10)];
+    bodyRef.current.style.backgroundColor = randomColor;
   }
 
   return (
     <div>
-      <input 
-        type='text'
-        placeholder='type a note...'
-        ref={inputRef}
-      />
-
-      <button onClick={handleButtonClick}>Focus Input</button>
+      <h3>Background Color Switcher</h3>
+      <button onClick={changeColor}>Change Color</button>
     </div>
   )
 }
