@@ -1,12 +1,9 @@
-
-import React from "react" ;
 import Note from "./Components/Note";
-
-
-// Named function or function expression
 function App({notes}){
- 
-  console.log(notes);
+  const addNote = (event) => {
+    event.preventDefault() ;
+    console.log("button Clicked" , event.target);
+  }
   return(
     <div>
       <h1>Notes</h1>
@@ -16,9 +13,12 @@ function App({notes}){
             <Note key={note.id} note = {note}/>
           )
         }
-
-
       </ul>
+      <form onSubmit={addNote}>
+        <input/>
+        <button type="submit"> Save Note</button>
+      </form>
+
     </div>
   )
 }
